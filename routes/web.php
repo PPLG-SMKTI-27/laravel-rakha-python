@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('portofolio');
+    return view('home');
+});
+
+Route::get('/projects', function () {
+    return view('project');
 });
 
 use App\Http\Controllers\ProjectController;

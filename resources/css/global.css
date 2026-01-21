@@ -1,0 +1,286 @@
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a0e27;
+    color: #e5e7eb;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   HEADER & NAVIGATION
+   ======================================== */
+
+header {
+    background: rgba(2, 6, 23, 0.95);
+    padding: 30px 10%;
+    position: relative;
+    border-bottom: 2px solid rgba(0, 255, 200, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+header h1 {
+    color: #00ffc8;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+header nav a {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00ffc8;
+    transition: width 0.3s ease;
+}
+
+header nav a:hover {
+    color: #00ffc8;
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
+
+main {
+    min-height: calc(100vh - 200px);
+}
+
+section {
+    padding: 80px 10%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #00ffc8;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+h3 {
+    color: #00ffc8;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    color: #b0b0b0;
+    line-height: 1.8;
+}
+
+/* ========================================
+   GRID & LAYOUT
+   ======================================== */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 200, 0.2);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.project-card:hover {
+    border-color: rgba(0, 255, 200, 0.8);
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.3);
+    transform: translateY(-5px);
+}
+
+.project-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(0, 255, 200, 0.3);
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.8s ease;
+}
+
+.project-item:hover {
+    border-color: rgba(0, 255, 200, 0.8);
+    box-shadow: 0 0 30px rgba(0, 255, 200, 0.4), inset 0 0 20px rgba(0, 255, 200, 0.1);
+    transform: translateY(-10px);
+}
+
+.project-item h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.tag {
+    background: rgba(0, 255, 200, 0.1);
+    border: 1px solid rgba(0, 255, 200, 0.3);
+    color: #00ffc8;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: rgba(0, 255, 200, 0.2);
+    border-color: rgba(0, 255, 200, 0.6);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+footer {
+    background: rgba(2, 6, 23, 0.95);
+    padding: 30px 10%;
+    text-align: center;
+    border-top: 2px solid rgba(0, 255, 200, 0.3);
+    color: #a0a0a0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(0, 255, 200, 0.5), 0 0 20px rgba(0, 255, 200, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(0, 255, 200, 0.8), 0 0 30px rgba(0, 255, 200, 0.5);
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    section {
+        padding: 60px 5%;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    header nav ul {
+        gap: 20px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-item p,
+    .project-card p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 40px 5%;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    header {
+        padding: 20px 5%;
+    }
+
+    header h1 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .project-card,
+    .project-item {
+        padding: 20px;
+    }
+}
