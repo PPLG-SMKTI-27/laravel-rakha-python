@@ -153,20 +153,12 @@
     <p class="intro-text">OPERATOR: <strong>{{ $name ?? 'RAKHA' }}</strong></p>
 
     <div class="projects-grid">
-        <div class="project-card">
-            <h3>CRUD_SYSTEM</h3>
-            <p>Aplikasi manajemen data berbasis <strong>Laravel & MySQL</strong>. Fokus pada efisiensi query dan keamanan arsitektur database.</p>
-        </div>
-
-        <div class="project-card">
-            <h3>WEB_PORTFOLIO</h3>
-            <p>Eksplorasi estetika <strong>Urban-Tech</strong> menggunakan Laravel Blade. Menggabungkan performa backend dengan desain street-art modern.</p>
-        </div>
-
-        <div class="project-card" style="--primary-glow: var(--secondary-glow)">
-            <h3>AUDIO_DSP</h3>
-            <p>Riset pengembangan <strong>Audio Plugin Concept</strong>. Implementasi digital signal processing untuk kebutuhan produksi musik modern.</p>
-        </div>
+        @foreach($projects as $project)
+            <div class="project-card">
+                <h3>{{ $project['title'] }}</h3>
+                <p>{{ $project['description'] }}</p>
+            </div>
+        @endforeach
     </div>
 
     <div class="back-nav">
