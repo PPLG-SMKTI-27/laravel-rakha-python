@@ -3,79 +3,96 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class ProjectController extends Controller
 {
     /**
-     * Show the projects page.
+     * Show project dashboard (public).
      */
-    public function index()
+    public function dashboard()
     {
-        $name = 'Rakha_Wardhana';
-        
-        $projects = [
-            [
-                'id' => 1,
-                'title' => 'CRUD_SYSTEM',
-                'description' => 'Aplikasi manajemen data berbasis Laravel & MySQL. Fokus pada efisiensi query dan keamanan arsitektur database.',
-                'technologies' => ['Laravel', 'MySQL', 'PHP']
-            ],
-            [
-                'id' => 2,
-                'title' => 'WEB_PORTFOLIO',
-                'description' => 'Eksplorasi estetika Urban-Tech menggunakan Laravel Blade. Menggabungkan performa backend dengan desain street-art modern.',
-                'technologies' => ['Laravel', 'Blade', 'CSS']
-            ],
-            [
-                'id' => 3,
-                'title' => 'AUDIO_DSP',
-                'description' => 'Riset pengembangan Audio Plugin Concept. Implementasi digital signal processing untuk kebutuhan produksi musik modern.',
-                'technologies' => ['DSP', 'Audio', 'C++']
-            ]
-        ];
-
-        return view('project', compact('name', 'projects'));
+        $projects = Project::all();
+        return view('project', compact('projects'));
     }
 
     /**
-     * Show a specific project.
+     * Show all projects for dashboard management.
      */
-    public function show($id)
+    public function dashboardProjects()
     {
-        $projects = $this->getProjects();
-        $project = collect($projects)->firstWhere('id', $id);
-
-        if (!$project) {
-            abort(404, 'Project not found');
-        }
-
-        return view('project.show', compact('project'));
+        $projects = Project::all();
+        return view('dashboard.projects', compact('projects'));
     }
 
     /**
-     * Get all projects data.
+     * Show create form for dashboard.
      */
-    private function getProjects()
+    public function projectCreate()
     {
-        return [
-            [
-                'id' => 1,
-                'title' => 'CRUD_SYSTEM',
-                'description' => 'Aplikasi manajemen data berbasis Laravel & MySQL. Fokus pada efisiensi query dan keamanan arsitektur database.',
-                'technologies' => ['Laravel', 'MySQL', 'PHP']
-            ],
-            [
-                'id' => 2,
-                'title' => 'WEB_PORTFOLIO',
-                'description' => 'Eksplorasi estetika Urban-Tech menggunakan Laravel Blade. Menggabungkan performa backend dengan desain street-art modern.',
-                'technologies' => ['Laravel', 'Blade', 'CSS']
-            ],
-            [
-                'id' => 3,
-                'title' => 'AUDIO_DSP',
-                'description' => 'Riset pengembangan Audio Plugin Concept. Implementasi digital signal processing untuk kebutuhan produksi musik modern.',
-                'technologies' => ['DSP', 'Audio', 'C++']
-            ]
-        ];
+        return view('dashboard.create-project');
+    }
+
+    /**
+     * Store a new project from dashboard.
+     */
+    public function projectStore(Request $request)
+    {
+        $validated = $request->validate([
+            'judul_project' => 'required|string|max:100',
+            'deskripsi' => 'required|string',
+            'teknologi' => 'required|string',
+            'link_project' => 'nullable|url',
+        ]);
+
+        // Convert teknologi string to array
+        $validated['teknologi'] = array_map('trim', explode(',', $validated['teknologi']));
+
+        Project::create($validated);
+
+        return redirect()->route('dashboard.projects')
+            ->with('success', 'Project berhasil ditambahkan!');
+    }
+
+    /**
+     * Show edit form for dashboard.
+     */
+    public function projectEdit(Project $project)
+    {
+        return view('dashboard.edit-project', compact('project'));
+    }
+
+    /**
+     * Update project from dashboard.
+     */
+    public function projectUpdate(Request $request, Project $project)
+    {
+        $validated = $request->validate([
+            'judul_project' => 'required|string|max:100',
+            'deskripsi' => 'required|string',
+            'teknologi' => 'required|string',
+            'link_project' => 'nullable|url',
+        ]);
+
+        // Convert teknologi string to array
+        $validated['teknologi'] = array_map('trim', explode(',', $validated['teknologi']));
+
+        $project->update($validated);
+
+        return redirect()->route('dashboard.projects')
+            ->with('success', 'Project berhasil diupdate!');
+    }
+
+    /**
+     * Delete project from dashboard.
+     */
+    public function projectDestroy(Project $project)
+    {
+        $project->delete();
+
+        return redirect()->route('dashboard.projects')
+            ->with('success', 'Project berhasil dihapus!');
     }
 }
+
+

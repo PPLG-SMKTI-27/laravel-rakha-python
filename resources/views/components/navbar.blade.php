@@ -6,6 +6,12 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="{{ route('login') }}" style="color: var(--primary-glow); font-weight: bold;">Login</a></li>
+            </ul>
+        @else
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{ route('login') }}" style="color: var(--primary-glow); font-weight: bold;">Login</a></li>
             </ul>
         @endif
     </nav>

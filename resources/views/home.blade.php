@@ -237,7 +237,7 @@
     </div>
     <p class="hero-sub">SOFTWARE ENGINEER // WEB ARCHITECT // PLUGIN DEV</p>
     
-    <a href="{{ route('projects') }}" class="btn-graffiti">
+    <a href="{{ route('project.dashboard') }}" class="btn-graffiti">
         OPEN_PROJECTS.exe
     </a>
 
