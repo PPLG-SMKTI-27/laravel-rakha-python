@@ -52,12 +52,13 @@ class DashboardController extends Controller
     }
 
     // Logout
-    public function logout()
-    {
-        session()->forget('user');
-        session()->forget('portfolio');
-
-        return redirect()->route('login')
-            ->with('success', 'Anda telah logout');
-    }
+// DashboardController.php
+public function logout(Request $request)
+{
+    $request->session()->forget('user'); // Hapus session user
+    $request->session()->flush(); // Clear semua session (opsional)
+    
+    return redirect()->route('login')
+        ->with('success', 'Logout berhasil');
+}
 }

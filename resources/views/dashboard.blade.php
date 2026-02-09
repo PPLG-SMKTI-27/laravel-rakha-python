@@ -33,6 +33,29 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Skills Menu Row -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100" style="background: rgba(0,255,65,0.02); border: 1px solid rgba(0,255,65,0.3);">
+                        <div class="card-header" style="background: rgba(0,255,65,0.1); border-bottom: 1px solid var(--primary-glow);">
+                            <h5 style="color: var(--primary-glow); margin: 0;">🛠️ Kelola Skills</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Tambah, edit, dan hapus skills dari portfolio Anda.</p>
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('dashboard.skills') }}" class="btn btn-success">
+                                    Kelola Skills →
+                                </a>
+                                <a href="{{ route('dashboard.skills.create') }}" class="btn btn-primary">
+                                    + Tambah Skill
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                 <!-- Profile Menu -->
                 <div class="col-md-6 mb-4">

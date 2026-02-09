@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Skill;
 
 class ProjectController extends Controller
 {
@@ -12,8 +13,12 @@ class ProjectController extends Controller
      */
     public function dashboard()
     {
+        // Ambil semua data dari tabel projects dan skills
         $projects = Project::all();
-        return view('project', compact('projects'));
+        $skills = Skill::all();
+
+        // Kirim data ke view
+        return view('project', compact('projects', 'skills'));
     }
 
     /**
@@ -45,7 +50,6 @@ class ProjectController extends Controller
             'link_project' => 'nullable|url',
         ]);
 
-        // Convert teknologi string to array
         $validated['teknologi'] = array_map('trim', explode(',', $validated['teknologi']));
 
         Project::create($validated);
@@ -74,7 +78,6 @@ class ProjectController extends Controller
             'link_project' => 'nullable|url',
         ]);
 
-        // Convert teknologi string to array
         $validated['teknologi'] = array_map('trim', explode(',', $validated['teknologi']));
 
         $project->update($validated);
@@ -94,5 +97,3 @@ class ProjectController extends Controller
             ->with('success', 'Project berhasil dihapus!');
     }
 }
-
-

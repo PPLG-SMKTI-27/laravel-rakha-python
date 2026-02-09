@@ -58,11 +58,11 @@
                 [01] BIO_DATA
             </button>
             <button class="px-6 py-2 font-header text-sm uppercase tracking-tighter border-2 border-zinc-700 text-zinc-500 hover:border-pink-600 hover:text-white transition-all">
-                [02] PROJECTS_LIST
+                [02] PROJECTS_SITE
             </button>
-            <button class="px-6 py-2 font-header text-sm uppercase tracking-tighter border-2 border-zinc-700 text-zinc-500 hover:border-pink-600 hover:text-white transition-all">
-                [03] SKILLS_VOID
-            </button>
+            <a href="{{ route('dashboard.skills') }}" class="px-6 py-2 font-header text-sm uppercase tracking-tighter border-2 border-zinc-700 text-zinc-500 hover:border-pink-600 hover:text-white transition-all inline-block">
+                [03] SKILLS_SITE
+            </a>
         </div>
 
         @if (session('success'))

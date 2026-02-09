@@ -186,6 +186,23 @@
         z-index: 10;
     }
 
+    .btn-manage {
+        display: inline-block;
+        background: var(--primary-glow);
+        color: #000;
+        padding: 10px 20px;
+        font-family: 'Bungee', cursive;
+        font-weight: 800;
+        border: 2px solid #000;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .btn-manage:hover {
+        background: var(--secondary-glow);
+        transform: scale(1.1);
+    }
+
     /* SECTION TITLES */
     .section-title {
         font-family: 'Permanent Marker', cursive;
@@ -261,13 +278,11 @@
 <section id="skills" style="background: #050505; padding: 80px 5%;">
     <h2 class="section-title">TECH_STACK</h2>
     <div class="skills-grid">
-        <div class="skill-sticker">HTML</div>
-        <div class="skill-sticker">CSS</div>
-        <div class="skill-sticker">JAVASCRIPT</div>
-        <div class="skill-sticker">PHP</div>
-        <div class="skill-sticker">MYSQL</div>
-        <div class="skill-sticker">C++</div>
+        @foreach($skills as $skill)
+        <div class="skill-sticker">{{ $skill->name }}</div>
+        @endforeach
     </div>
+ 
 </section>
 
 <section id="contact" style="padding: 100px 10%;">
