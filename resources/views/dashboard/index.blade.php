@@ -44,7 +44,7 @@
                 <a href="{{ route('dashboard.projects') }}" class="bg-zinc-900 text-green-400 border border-green-400 px-4 py-2 text-xs font-bold uppercase hover:bg-green-400 hover:text-black transition-all">
                     MANAGE_PROJECTS.SYS
                 </a>
-                <form action="{{ route('dashboard.logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="bg-zinc-900 text-red-500 border border-red-500 px-4 py-2 text-xs font-bold uppercase hover:bg-red-500 hover:text-white transition-all">
                         SIGNOUT.SH

@@ -149,7 +149,7 @@
         @endif
 
         <div class="mt-12">
-            <a href="{{ route('dashboard.index') }}" class="text-zinc-600 hover:text-pink-500 text-xs uppercase font-bold tracking-widest transition-colors flex items-center gap-2">
+            <a href="{{ route('dashboard') }}" class="text-zinc-600 hover:text-pink-500 text-xs uppercase font-bold tracking-widest transition-colors flex items-center gap-2">
                 <span class="text-green-400"><</span> RETURN_TO_SYSTEM_CORE
             </a>
         </div>
