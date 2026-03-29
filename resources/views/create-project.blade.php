@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div class="container-fluid mt-3 mt-md-5 px-3 px-md-4">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-12 col-md-10 col-lg-8">
             <div class="card" style="background: rgba(0,255,65,0.02); border: 1px solid var(--primary-glow);">
                 <div class="card-header" style="background: rgba(0,255,65,0.1); border-bottom: 1px solid var(--primary-glow);">
-                    <h3 style="color: var(--primary-glow); margin: 0;">🚀 Create New Project</h3>
+                    <h3 style="color: var(--primary-glow); margin: 0; font-size: clamp(1.2rem, 3vw, 1.5rem);">🚀 Create New Project</h3>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body p-3 p-md-4">
                     <!-- Error Messages -->
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show">
                             <strong>❌ Validation Error!</strong>
-                            <ul class="mb-0">
+                            <ul class="mb-0 font-size-sm">
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                    <li class="text-wrap">{{ $error }}</li>
                                 @endforeach
                             </ul>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -36,7 +36,7 @@
                                 type="text" 
                                 id="judul_project"
                                 name="judul_project" 
-                                class="form-control @error('judul_project') is-invalid @enderror"
+                                class="form-control form-control-sm form-control-md @error('judul_project') is-invalid @enderror"
                                 value="{{ old('judul_project') }}"
                                 placeholder="Masukkan judul project"
                                 required
@@ -54,8 +54,8 @@
                             <textarea 
                                 id="deskripsi"
                                 name="deskripsi" 
-                                class="form-control @error('deskripsi') is-invalid @enderror"
-                                rows="4"
+                                class="form-control form-control-sm form-control-md @error('deskripsi') is-invalid @enderror"
+                                rows="3"
                                 placeholder="Jelaskan project Anda"
                                 required
                             >{{ old('deskripsi') }}</textarea>
@@ -73,7 +73,7 @@
                                 type="text" 
                                 id="teknologi"
                                 name="teknologi" 
-                                class="form-control @error('teknologi') is-invalid @enderror"
+                                class="form-control form-control-sm form-control-md @error('teknologi') is-invalid @enderror"
                                 value="{{ old('teknologi') }}"
                                 placeholder="Contoh: Laravel, MySQL, Bootstrap"
                                 required
@@ -93,7 +93,7 @@
                                 type="url" 
                                 id="link_project"
                                 name="link_project" 
-                                class="form-control @error('link_project') is-invalid @enderror"
+                                class="form-control form-control-sm form-control-md @error('link_project') is-invalid @enderror"
                                 value="{{ old('link_project') }}"
                                 placeholder="https://example.com"
                             >
@@ -103,11 +103,11 @@
                         </div>
 
                         <!-- Buttons -->
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-success">
+                        <div class="d-flex gap-2 flex-column flex-sm-row">
+                            <button type="submit" class="btn btn-success flex-grow-1">
                                 💾 Save Project
                             </button>
-                            <a href="{{ route('projects.index') }}" class="btn btn-secondary">
+                            <a href="{{ route('projects.index') }}" class="btn btn-secondary flex-grow-1">
                                 ❌ Cancel
                             </a>
                         </div>

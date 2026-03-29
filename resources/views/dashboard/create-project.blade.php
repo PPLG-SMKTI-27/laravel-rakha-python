@@ -13,7 +13,7 @@
     .font-header { font-family: 'Syne', sans-serif; }
     .font-body { font-family: 'JetBrains Mono', monospace; }
     
-    .brutal-shadow { box-shadow: 6px 6px 0px 0px #00ff41; }
+    .brutal-shadow { box-shadow: 6px 6px 6px 0px 0px #00ff41; }
     .brutal-shadow-pink { box-shadow: 6px 6px 0px 0px #ff006e; }
 
     /* Custom Input Styles */
@@ -62,7 +62,7 @@
             </p>
         </div>
 
-        <div class="bg-zinc-900 border-2 border-zinc-800 p-8 brutal-shadow-pink relative">
+        <div class="bg-zinc-900 border-8 border-green-400 p-8 brutal-shadow relative">
             
             <form action="{{ route('dashboard.projects.store') }}" method="POST">
                 @csrf
@@ -141,18 +141,18 @@
                     @enderror
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-zinc-800">
-                    <button type="submit" class="bg-white text-black font-header px-10 py-4 text-xl uppercase tracking-tighter border-2 border-white hover:bg-green-400 hover:border-green-400 transition-all brutal-shadow active:translate-y-1 active:shadow-none">
+                <div class="flex flex-col sm:flex-row gap-2 w-full pt-6 justify-center">
+                    <button type="submit" class="bg-white text-black font-header px-5 py-1.5 text-sm uppercase tracking-tighter border-2 border-white hover:bg-green-400 hover:border-green-400 transition-all active:translate-y-1">
                         PUSH_TO_DATABASE.EXE
                     </button>
                     
-                    <a href="{{ route('dashboard.projects') }}" class="bg-zinc-900 text-zinc-500 font-header px-10 py-4 text-xl uppercase tracking-tighter border-2 border-zinc-800 hover:text-white hover:border-zinc-500 transition-all text-center">
+                    <a href="{{ route('dashboard.projects') }}" class="bg-zinc-800 text-green-400 font-header px-5 py-1.5 text-sm uppercase tracking-tighter border-2 border-green-400 hover:bg-green-400 hover:text-black transition-all text-center">
                         TERMINATE_PROCESS
                     </a>
                 </div>
             </form>
 
-            <div class="absolute -bottom-3 -left-2 text-[10px] text-zinc-700 font-bold uppercase bg-black px-2">
+            <div class="mt-6 pt-4 border-t border-zinc-800 text-[10px] text-zinc-600 font-bold uppercase">
                 UID: {{ Auth::id() ?? 'SESSION_01' }} // IP: {{ request()->ip() }}
             </div>
         </div>

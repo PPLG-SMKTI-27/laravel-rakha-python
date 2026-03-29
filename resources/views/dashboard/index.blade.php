@@ -1,190 +1,125 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard | Rakha')
+
 @section('content')
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Syne:wght@800&family=JetBrains+Mono&display=swap');
+<div class="min-h-screen bg-neutral-900 text-white font-mono">
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 py-12 px-4">
+        <!-- SIDEBAR -->
+        <aside class="md:col-span-1">
+            <div class="sticky top-24">
+                <!-- Title -->
+                <h1 class="text-5xl font-black uppercase mb-8 text-green-400 drop-shadow-[3px_3px_0px_#ff0055]">
+                    USER<br><span class="text-pink-500">_CTRL</span>
+                </h1>
 
-    .cyber-bg {
-        background-color: #000;
-        background-image: radial-gradient(#333 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
+                <!-- Navigation Links -->
+                <nav class="flex flex-col gap-4 mb-8">
+                    <a href="#" class="block px-4 py-3 bg-neutral-800 border-2 border-green-400 text-green-400 font-bold hover:bg-green-400 hover:text-neutral-900 transition">
+                        01 // PROFILE_DATA
+                    </a>
+                    <a href="{{ route('dashboard.projects') }}" class="block px-4 py-3 bg-neutral-800 border-2 border-pink-500 text-pink-400 font-bold hover:bg-pink-400 hover:text-neutral-900 transition">
+                        02 // PROJECT_INDEX
+                    </a>
+                    <a href="{{ route('dashboard.skills') }}" class="block px-4 py-3 bg-neutral-800 border-2 border-yellow-400 text-yellow-400 font-bold hover:bg-yellow-400 hover:text-neutral-900 transition">
+                        03 // SKILL_MODULES
+                    </a>
+                </nav>
 
-    .font-header { font-family: 'Syne', sans-serif; }
-    .font-body { font-family: 'JetBrains Mono', monospace; }
-    
-    .brutal-shadow { box-shadow: 5px 5px 0px 0px #00ff41; }
-    .brutal-shadow-pink { box-shadow: 5px 5px 0px 0px #ff006e; }
-
-    /* Custom Scrollbar untuk Tabel */
-    .custom-scroll::-webkit-scrollbar { height: 4px; }
-    .custom-scroll::-webkit-scrollbar-track { background: #111; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #00ff41; }
-
-    .nav-tab-active {
-        background: #ff006e;
-        color: white;
-        box-shadow: 4px 4px 0px 0px #00ff41;
-        transform: translateY(-2px);
-    }
-</style>
-
-<div class="min-h-screen cyber-bg py-12 px-4 sm:px-6 lg:px-8 font-body">
-    <div class="max-w-6xl mx-auto">
-        
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12 border-b-2 border-zinc-800 pb-8">
-            <div>
-                <div class="inline-block bg-pink-600 px-4 py-1 mb-2 brutal-shadow">
-                    <h2 class="font-header text-2xl text-white uppercase italic tracking-tighter">⚡ SYSTEM_DASHBOARD</h2>
+                <!-- System Status Box -->
+                <div class="bg-green-400 text-neutral-900 font-bold p-4 shadow-lg border-2 border-neutral-900">
+                    <div class="uppercase text-xs mb-2">System Integrity</div>
+                    <div class="text-sm">All sectors operational.<br>Database uplink stable at 120ms.</div>
                 </div>
-                <p class="text-zinc-500 text-xs tracking-widest uppercase italic">Authorized Access Only // Welcome back, Operator.</p>
             </div>
-            
-            <div class="flex gap-4">
-                <a href="{{ route('dashboard.projects') }}" class="bg-zinc-900 text-green-400 border border-green-400 px-4 py-2 text-xs font-bold uppercase hover:bg-green-400 hover:text-black transition-all">
-                    MANAGE_PROJECTS.SYS
-                </a>
-                <form action="{{ route('logout') }}" method="POST">
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="md:col-span-3">
+            @if (session('success'))
+                <div class="bg-green-400 text-neutral-900 font-bold p-6 mb-8 border-2 border-neutral-900 shadow-lg flex items-center justify-between">
+                    <span class="text-xl uppercase">✓ Success! Data Overwritten.</span>
+                    <span class="text-2xl">→</span>
+                </div>
+            @endif
+
+            <!-- Edit Form Card -->
+            <div class="bg-neutral-800 border-2 border-green-400 p-8 shadow-lg">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-8 pb-6 border-b-2 border-green-400">
+                    <h2 class="text-4xl font-black uppercase text-green-400">Edit_Bio</h2>
+                    <span class="text-xs text-pink-400 font-bold uppercase">Auth_Level: Operator_01</span>
+                </div>
+
+                <!-- Form -->
+                <form action="{{ route('dashboard.update') }}" method="POST" class="space-y-6">
                     @csrf
-                    <button type="submit" class="bg-zinc-900 text-red-500 border border-red-500 px-4 py-2 text-xs font-bold uppercase hover:bg-red-500 hover:text-white transition-all">
-                        SIGNOUT.SH
-                    </button>
+                    @method('PUT')
+
+                    <!-- Name and Role Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-green-400 font-bold mb-2 uppercase text-sm">Full Name</label>
+                            <input type="text" name="nama" value="{{ old('nama', $portfolio['nama']) }}" class="w-full px-4 py-3 border-2 border-green-400 bg-neutral-900 text-white font-bold focus:outline-none focus:border-pink-400 focus:bg-neutral-700 transition" required>
+                            @error('nama')
+                                <span class="text-pink-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div>
+                            <label class="block text-green-400 font-bold mb-2 uppercase text-sm">Current Role</label>
+                            <input type="text" name="profesi" value="{{ old('profesi', $portfolio['profesi']) }}" class="w-full px-4 py-3 border-2 border-green-400 bg-neutral-900 text-white font-bold focus:outline-none focus:border-pink-400 focus:bg-neutral-700 transition" required>
+                            @error('profesi')
+                                <span class="text-pink-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Phone and Location Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-green-400 font-bold mb-2 uppercase text-sm">Contact Uplink</label>
+                            <input type="text" name="telepon" value="{{ old('telepon', $portfolio['telepon']) }}" class="w-full px-4 py-3 border-2 border-green-400 bg-neutral-900 text-white font-bold focus:outline-none focus:border-pink-400 focus:bg-neutral-700 transition" required>
+                            @error('telepon')
+                                <span class="text-pink-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div>
+                            <label class="block text-green-400 font-bold mb-2 uppercase text-sm">Sector Location</label>
+                            <input type="text" name="lokasi" value="{{ old('lokasi', $portfolio['lokasi']) }}" class="w-full px-4 py-3 border-2 border-green-400 bg-neutral-900 text-white font-bold focus:outline-none focus:border-pink-400 focus:bg-neutral-700 transition" required>
+                            @error('lokasi')
+                                <span class="text-pink-500 text-xs mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Biography -->
+                    <div>
+                        <label class="block text-green-400 font-bold mb-2 uppercase text-sm">Core Biography</label>
+                        <textarea name="tentang" rows="5" class="w-full px-4 py-3 border-2 border-green-400 bg-neutral-900 text-white font-bold focus:outline-none focus:border-pink-400 focus:bg-neutral-700 transition resize-none" required>{{ old('tentang', $portfolio['tentang']) }}</textarea>
+                        @error('tentang')
+                            <span class="text-pink-500 text-xs mt-1">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex items-center gap-6 pt-4">
+                        <button type="submit" class="px-8 py-3 bg-green-400 text-neutral-900 font-black uppercase hover:bg-pink-400 hover:text-white transition text-lg border-2 border-neutral-900 shadow-lg">
+                            EXECUTE_COMMIT →
+                        </button>
+                        <span class="text-xs text-pink-400 uppercase font-bold">Warning: Overwriting entries is permanent and tracked.</span>
+                    </div>
                 </form>
             </div>
-        </div>
 
-        <div class="flex flex-wrap gap-4 mb-10">
-            <button class="px-6 py-2 font-header text-sm uppercase tracking-tighter border-2 border-zinc-700 text-zinc-500 hover:border-pink-600 hover:text-white transition-all nav-tab-active">
-                [01] BIO_DATA
-            </button>
-            <button class="px-6 py-2 font-header text-sm uppercase tracking-tighter border-2 border-zinc-700 text-zinc-500 hover:border-pink-600 hover:text-white transition-all">
-                [02] PROJECTS_SITE
-            </button>
-            <a href="{{ route('dashboard.skills') }}" class="px-6 py-2 font-header text-sm uppercase tracking-tighter border-2 border-zinc-700 text-zinc-500 hover:border-pink-600 hover:text-white transition-all inline-block">
-                [03] SKILLS_SITE
-            </a>
-        </div>
-
-        @if (session('success'))
-            <div class="mb-8 bg-green-400 text-black p-4 font-header uppercase tracking-tighter flex items-center gap-3 brutal-shadow">
-                <span class="animate-pulse text-2xl">✔</span>
-                SUCCESS: {{ session('success') }}
+            <!-- Footer Info -->
+            <div class="mt-12 flex justify-between text-xs text-pink-400 font-bold uppercase tracking-widest">
+                <span>Log_099x // Build_v4.0.1</span>
+                <span>Kernel: Stable</span>
+                <span>2026 Gravity UI Lib</span>
             </div>
-        @endif
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            
-            <div class="lg:col-span-2 space-y-8">
-                <div class="bg-zinc-900 border-2 border-zinc-800 p-8 brutal-shadow-pink relative">
-                    <div class="flex items-center gap-3 mb-8">
-                        <span class="text-green-400">📝</span>
-                        <h5 class="font-header text-white uppercase tracking-tighter">MODIFY_BIO_DATA</h5>
-                    </div>
-
-                    <form action="{{ route('dashboard.update') }}" method="POST" class="space-y-6">
-                        @csrf
-                        @method('PUT')
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest italic">USER_FULL_NAME</label>
-                                <input type="text" name="nama" value="{{ old('nama', $portfolio['nama']) }}" 
-                                    class="w-full bg-black border border-zinc-800 p-3 text-white text-sm focus:border-green-400 outline-none transition-all" required>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest italic">PROFESSION_TAG</label>
-                                <input type="text" name="profesi" value="{{ old('profesi', $portfolio['profesi']) }}" 
-                                    class="w-full bg-black border border-zinc-800 p-3 text-white text-sm focus:border-green-400 outline-none transition-all" required>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest italic">COMM_LINE_PHONE</label>
-                                <input type="text" name="telepon" value="{{ old('telepon', $portfolio['telepon']) }}" 
-                                    class="w-full bg-black border border-zinc-800 p-3 text-white text-sm focus:border-green-400 outline-none transition-all" required>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest italic">GEO_LOCATION</label>
-                                <input type="text" name="lokasi" value="{{ old('lokasi', $portfolio['lokasi']) }}" 
-                                    class="w-full bg-black border border-zinc-800 p-3 text-white text-sm focus:border-green-400 outline-none transition-all" required>
-                            </div>
-                        </div>
-
-                        <div class="space-y-2">
-                            <label class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest italic">ABOUT_OPERATOR_LOG</label>
-                            <textarea name="tentang" rows="4" 
-                                class="w-full bg-black border border-zinc-800 p-3 text-white text-sm focus:border-green-400 outline-none transition-all" required>{{ old('tentang', $portfolio['tentang']) }}</textarea>
-                        </div>
-
-                        <button type="submit" class="bg-white text-black font-header px-8 py-3 uppercase border-2 border-white hover:bg-green-400 hover:border-green-400 transition-all brutal-shadow">
-                            SAVE_CHANGES.EXE
-                        </button>
-                    </form>
-                </div>
-
-                <div class="bg-zinc-900 border-2 border-zinc-800 p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h5 class="font-header text-white uppercase tracking-tighter flex items-center gap-2">
-                            <span class="text-pink-500">🚀</span> PROJECT_RECORDS
-                        </h5>
-                        <a href="{{ route('dashboard.projects.create') }}" class="text-[10px] font-bold text-green-400 uppercase tracking-widest hover:underline">
-                            + CREATE_NEW_ENTRY
-                        </a>
-                    </div>
-                    
-                    <div class="overflow-x-auto custom-scroll">
-                        <table class="w-full text-left text-xs uppercase font-bold">
-                            <thead>
-                                <tr class="text-zinc-600 border-b border-zinc-800">
-                                    <th class="pb-3 px-2">PROJECT_NAME</th>
-                                    <th class="pb-3 px-2">TECH_STACK</th>
-                                    <th class="pb-3 px-2">STATUS</th>
-                                    <th class="pb-3 px-2">ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-zinc-400">
-                                <tr class="border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors">
-                                    <td class="py-4 px-2 text-white italic">Landing Page AI</td>
-                                    <td class="py-4 px-2">
-                                        <span class="bg-green-500/10 text-green-400 px-2 py-0.5 border border-green-400/30 font-mono italic">Laravel</span>
-                                    </td>
-                                    <td class="py-4 px-2 text-green-400 font-mono">LIVE_SRC</td>
-                                    <td class="py-4 px-2 flex gap-2">
-                                        <button class="text-zinc-500 hover:text-white transition-colors">✏️</button>
-                                        <button class="text-zinc-500 hover:text-red-500 transition-colors">🗑️</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="space-y-8">
-                <div class="bg-zinc-900 border-2 border-zinc-800 p-6 brutal-shadow">
-                    <h5 class="font-header text-white uppercase tracking-tighter mb-6 flex items-center gap-2">
-                        <span class="text-green-400">🛠️</span> SKILL_ARRAY
-                    </h5>
-                    
-                    <div class="space-y-4">
-                        <div class="p-4 bg-black border border-zinc-800 border-l-4 border-l-green-400">
-                            <h6 class="text-green-400 text-[10px] font-bold uppercase mb-1 tracking-widest italic">BACKEND_MODULE</h6>
-                            <p class="text-zinc-500 text-xs">PHP, Laravel, MySQL, PostgreSQL</p>
-                        </div>
-                        <div class="p-4 bg-black border border-zinc-800 border-l-4 border-l-pink-600">
-                            <h6 class="text-pink-600 text-[10px] font-bold uppercase mb-1 tracking-widest italic">FRONTEND_UI</h6>
-                            <p class="text-zinc-500 text-xs">HTML5, Tailwind, JavaScript, React</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-black border border-zinc-800 p-4 font-mono text-[10px] text-zinc-600 space-y-1 italic">
-                    <p>> initializing system_dashboard.bat...</p>
-                    <p>> connection established...</p>
-                    <p>> welcome back, rakha...</p>
-                    <p>> current_session: stable</p>
-                    <div class="animate-pulse">> _</div>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 </div>
+
 @endsection

@@ -28,14 +28,13 @@
 
         body {
             background-color: var(--bg-black);
-            /* Grid Pattern */
             background-image: 
                 linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
             background-size: 30px 30px;
             font-family: 'Space Mono', monospace;
             color: var(--text-main);
-            padding: 2rem;
+            padding: clamp(1rem, 3vw, 2rem);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -64,17 +63,19 @@
         header {
             background: var(--surface);
             border: var(--brutal-border);
-            padding: 2.5rem;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
             box-shadow: var(--shadow-accent);
-            margin-bottom: 4rem;
+            margin-bottom: clamp(2rem, 5vw, 4rem);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.5rem, 5vw, 3.5rem);
             text-transform: uppercase;
             color: white;
             line-height: 1;
@@ -93,7 +94,7 @@
         /* --- BUTTONS --- */
         .btn-brutal {
             display: inline-block;
-            padding: 1rem 1.5rem;
+            padding: clamp(0.7rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem);
             background: white;
             color: black;
             text-decoration: none;
@@ -103,7 +104,8 @@
             box-shadow: 4px 4px 0px var(--accent);
             transition: 0.1s;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            white-space: nowrap;
         }
 
         .btn-brutal:hover {
@@ -126,11 +128,13 @@
             border: var(--brutal-border);
             box-shadow: var(--shadow-white);
             margin-bottom: 3rem;
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
         }
 
         thead {
@@ -139,14 +143,15 @@
         }
 
         th {
-            padding: 1.2rem;
+            padding: clamp(0.8rem, 2vw, 1.2rem);
             text-align: left;
             text-transform: uppercase;
             border-bottom: 4px solid white;
+            font-size: clamp(0.7rem, 1.2vw, 0.9rem);
         }
 
         td {
-            padding: 1.2rem;
+            padding: clamp(0.8rem, 2vw, 1.2rem);
             border-bottom: 1px solid rgba(255,255,255,0.1);
             color: #ccc;
         }
@@ -159,12 +164,12 @@
         .skill-name {
             color: white;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
         }
 
         /* --- EMPTY STATE --- */
         .empty-state {
-            padding: 5rem 2rem;
+            padding: clamp(2rem, 5vw, 5rem);
             text-align: center;
             border: 4px dashed var(--accent);
             background: var(--surface);
@@ -185,6 +190,40 @@
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-black); }
         ::-webkit-scrollbar-thumb { background: white; border: 2px solid var(--bg-black); }
+
+        /* Mobile-friendly operations column */
+        .operations {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .operations a, .operations button {
+            font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: clamp(1rem, 2vw, 2rem);
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+        }
+
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .operations {
+                flex-direction: column;
+            }
+
+            .operations a, .operations button {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -222,14 +261,14 @@
                     <td>{{ $skill->description ?? '[NO_DESC_PROVIDED]' }}</td>
                     <td>{{ $skill->created_at->format('d/m/Y') }}</td>
                     <td>
-                        <div style="display: flex; gap: 15px;">
-                            <a href="{{ route('dashboard.skills.edit', $skill) }}" style="color: var(--accent); text-decoration: none; font-weight: bold;">
+                        <div class="operations">
+                            <a href="{{ route('dashboard.skills.edit', $skill) }}" style="color: var(--accent); text-decoration: none; font-weight: bold; padding: 4px 8px; border: 1px solid var(--accent); display: inline-block;">
                                 [EDIT]
                             </a>
-                            <form action="{{ route('dashboard.skills.destroy', $skill) }}" method="POST">
+                            <form action="{{ route('dashboard.skills.destroy', $skill) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" style="background: none; border: none; color: var(--danger); font-family: 'Space Mono'; font-weight: bold; cursor: pointer;">
+                                <button type="submit" style="background: none; border: 1px solid var(--danger); color: var(--danger); font-family: 'Space Mono'; font-weight: bold; cursor: pointer; padding: 4px 8px;">
                                     [ERASE]
                                 </button>
                             </form>
@@ -249,7 +288,7 @@
     @endif
 
     <footer>
-        <a href="/skills" style="color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid transparent; transition: 0.3s;">
+        <a href="/skills" style="color: rgba(255,255,255,0.4); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; display: inline-block; word-break: break-word;">
             <i class="fas fa-arrow-left"></i> BACK_TO_MAIN_TERMINAL
         </a>
     </footer>

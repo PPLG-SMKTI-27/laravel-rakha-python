@@ -53,7 +53,7 @@
 
     .logo-tag {
         font-family: 'Permanent Marker', cursive;
-        font-size: 2rem;
+        font-size: clamp(1.2rem, 5vw, 2rem);
         color: var(--primary-glow);
         text-shadow: 3px 3px 0px var(--secondary-glow);
         letter-spacing: 2px;
@@ -61,21 +61,28 @@
 
     /* HERO SECTION */
     .hero {
-        min-height: 80vh;
+        min-height: 60vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
         position: relative;
-        padding: 50px 10%;
+        padding: 20px 5%;
+    }
+
+    @media (min-width: 768px) {
+        .hero {
+            min-height: 80vh;
+            padding: 50px 10%;
+        }
     }
 
     .hero-tag {
         font-family: 'Bungee', cursive;
-        font-size: clamp(3rem, 10vw, 6rem);
+        font-size: clamp(2rem, 8vw, 6rem);
         line-height: 0.9;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         position: relative;
         z-index: 2;
     }
@@ -102,21 +109,26 @@
         padding: 5px 15px;
         font-weight: bold;
         transform: rotate(1deg);
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        font-size: clamp(0.75rem, 2vw, 1rem);
+        white-space: normal;
+        display: inline-block;
+        max-width: 100%;
     }
 
     /* BUTTONS */
     .btn-graffiti {
         font-family: 'Permanent Marker', cursive;
-        font-size: 1.5rem;
+        font-size: clamp(1rem, 3vw, 1.5rem);
         background: #fff;
         color: #000;
-        padding: 10px 40px;
+        padding: clamp(8px, 3vw, 10px) clamp(20px, 5vw, 40px);
         text-decoration: none;
         border: 4px solid #000;
         box-shadow: 8px 8px 0px var(--primary-glow);
         transition: 0.2s;
         position: relative;
+        display: inline-block;
     }
 
     .btn-graffiti:hover {
@@ -127,14 +139,20 @@
     /* PHOTO STYLING */
     .photo-container {
         position: relative;
-        margin-top: 50px;
+        margin-top: 20px;
+    }
+
+    @media (min-width: 768px) {
+        .photo-container {
+            margin-top: 50px;
+        }
     }
 
     .photo-container img {
-        width: 250px;
-        height: 250px;
+        width: clamp(150px, 50vw, 250px);
+        height: clamp(150px, 50vw, 250px);
         object-fit: cover;
-        border: 10px solid #fff;
+        border: clamp(5px, 2vw, 10px) solid #fff;
         transform: rotate(5deg);
         filter: grayscale(100%) contrast(120%);
         transition: 0.3s;
@@ -154,27 +172,29 @@
         background: var(--secondary-glow);
         padding: 5px 20px;
         transform: rotate(-10deg);
+        font-size: clamp(0.75rem, 2vw, 1rem);
     }
 
     /* SKILLS STYLING (Poster/Sticker Style) */
     .skills-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
+        gap: clamp(10px, 3vw, 20px);
         justify-content: center;
-        padding: 50px 0;
+        padding: clamp(20px, 5vw, 50px) 0;
     }
 
     .skill-sticker {
         background: #eee;
         color: #000;
-        padding: 15px 30px;
+        padding: clamp(10px, 2vw, 15px) clamp(15px, 4vw, 30px);
         font-weight: 800;
         font-family: 'Bungee', cursive;
         border: 2px solid #000;
         transform: rotate(calc(var(--r, 0) * 1deg));
         transition: 0.3s;
         cursor: pointer;
+        font-size: clamp(0.7rem, 2vw, 1rem);
     }
 
     .skill-sticker:nth-child(odd) { --r: -5; }
@@ -206,9 +226,9 @@
     /* SECTION TITLES */
     .section-title {
         font-family: 'Permanent Marker', cursive;
-        font-size: 3rem;
+        font-size: clamp(1.5rem, 6vw, 3rem);
         text-align: center;
-        margin-bottom: 50px;
+        margin-bottom: clamp(20px, 5vw, 50px);
         text-decoration: underline wavy var(--secondary-glow);
     }
 
@@ -216,10 +236,11 @@
     .contact-card {
         background: #111;
         border-left: 10px solid var(--primary-glow);
-        padding: 40px;
+        padding: clamp(20px, 5vw, 40px);
         max-width: 600px;
         margin: 0 auto;
         position: relative;
+        font-size: clamp(0.9rem, 2vw, 1rem);
     }
 
     .contact-card::before {
@@ -231,17 +252,37 @@
         color: #000;
         padding: 2px 15px;
         font-weight: bold;
+        font-size: clamp(0.7rem, 1.5vw, 0.9rem);
     }
 
     footer {
         text-align: center;
-        padding: 40px;
+        padding: clamp(20px, 5vw, 40px);
         font-family: 'Space Mono', monospace;
         border-top: 1px dashed #444;
+        font-size: clamp(0.8rem, 2vw, 1rem);
     }
 
-    @media (max-width: 768px) {
-        .hero-tag { font-size: 3.5rem; }
+    #about {
+        padding: clamp(40px, 10vw, 100px) 5%;
+    }
+
+    #skills {
+        background: #050505;
+        padding: clamp(40px, 8vw, 80px) clamp(5%, 3vw, 5%);
+    }
+
+    #contact {
+        padding: clamp(40px, 10vw, 100px) 5%;
+    }
+
+    #about > div {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        line-height: 1.8;
+        color: #ccc;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
     }
 @endsection
 
@@ -263,9 +304,9 @@
     </div>
 </section>
 
-<section id="about" style="padding: 100px 10%;">
+<section id="about">
     <h2 class="section-title">MISSION_STATEMENT</h2>
-    <div style="font-size: 1.2rem; line-height: 2; color: #ccc; max-width: 800px; margin: 0 auto; text-align: center;">
+    <div>
         <p>
             Halo! Saya <span style="color: var(--primary-glow); font-weight: bold;">Rakha</span>. 
             Seorang individu yang terobsesi dengan struktur kode dan estetika digital. 
@@ -275,17 +316,16 @@
     </div>
 </section>
 
-<section id="skills" style="background: #050505; padding: 80px 5%;">
+<section id="skills">
     <h2 class="section-title">TECH_STACK</h2>
     <div class="skills-grid">
         @foreach($skills as $skill)
         <div class="skill-sticker">{{ $skill->name }}</div>
         @endforeach
     </div>
- 
 </section>
 
-<section id="contact" style="padding: 100px 10%;">
+<section id="contact">
     <h2 class="section-title">GET_IN_TOUCH</h2>
     <div class="contact-card">
         <p style="margin-bottom: 15px;">> EMAIL: <span style="color: var(--primary-glow)">raditrakawar1@gmail.com</span></p>

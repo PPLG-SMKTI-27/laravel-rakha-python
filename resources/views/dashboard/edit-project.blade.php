@@ -57,7 +57,7 @@
             </p>
         </div>
 
-        <div class="bg-zinc-900 border-2 border-zinc-800 p-8 brutal-shadow relative">
+        <div class="bg-zinc-900 border-8 border-pink-600 p-8 brutal-shadow-pink relative">
             
             <form action="{{ route('dashboard.projects.update', $project->id) }}" method="POST">
                 @csrf
@@ -125,18 +125,18 @@
                     @enderror
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-zinc-800">
-                    <button type="submit" class="bg-green-400 text-black font-header px-10 py-4 text-xl uppercase tracking-tighter border-2 border-green-400 hover:bg-white hover:border-white transition-all brutal-shadow">
+                <div class="flex flex-col sm:flex-row gap-2 w-full pt-6 justify-center">
+                    <button type="submit" class="bg-green-400 text-black font-header px-5 py-1.5 text-sm uppercase tracking-tighter border-2 border-green-400 hover:bg-white hover:border-white transition-all">
                         EXECUTE_PATCH.EXE
                     </button>
                     
-                    <a href="{{ route('dashboard.projects') }}" class="bg-zinc-900 text-zinc-500 font-header px-10 py-4 text-xl uppercase tracking-tighter border-2 border-zinc-800 hover:text-white hover:border-zinc-500 transition-all text-center">
+                    <a href="{{ route('dashboard.projects') }}" class="bg-zinc-800 text-pink-600 font-header px-5 py-1.5 text-sm uppercase tracking-tighter border-2 border-pink-600 hover:bg-pink-600 hover:text-white transition-all text-center">
                         ABORT_MISSION
                     </a>
                 </div>
             </form>
 
-            <div class="absolute -top-3 -right-2 text-[10px] text-zinc-700 font-bold uppercase bg-black px-2 italic">
+            <div class="mt-6 pt-4 border-t border-zinc-800 text-[10px] text-zinc-600 font-bold uppercase italic">
                 LAST_MODIFIED: {{ $project->updated_at->format('Y.m.d_H:i') }}
             </div>
         </div>

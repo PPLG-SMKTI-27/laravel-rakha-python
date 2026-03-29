@@ -7,42 +7,42 @@
         }
 
         header {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px 5%;
-            border-bottom: 4px solid var(--primary-glow);
-            transform: skewY(-1deg);
+            background: #000;
+            padding: 12px 3%;
+            border-bottom: 3px solid var(--primary-glow);
             position: sticky;
             top: 0;
             z-index: 1000;
+            margin: 0;
         }
 
         header nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transform: skewY(1deg);
-            gap: 24px;
+            gap: 20px;
         }
 
         header h1 {
             font-family: 'Permanent Marker', cursive;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--primary-glow);
-            text-shadow: 3px 3px 0px var(--secondary-glow);
-            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px var(--secondary-glow);
+            letter-spacing: 1px;
             margin: 0;
             line-height: 1;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         header nav ul {
             list-style: none;
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 16px;
             margin: 0;
             padding: 0;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: flex-end;
         }
 
@@ -50,33 +50,46 @@
         header nav button {
             font-family: 'Space Mono', monospace;
             font-weight: 700;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: #fff;
             text-decoration: none;
             background: transparent;
             border: 0;
-            padding: 6px 10px;
+            padding: 4px 8px;
             cursor: pointer;
-            transition: 0.25s;
+            transition: 0.2s;
         }
 
         header nav a:hover,
         header nav button:hover {
             color: var(--bg-dark);
             background: var(--primary-glow);
-            box-shadow: 4px 4px 0px var(--secondary-glow);
+            box-shadow: 3px 3px 0px var(--secondary-glow);
         }
 
         @media (max-width: 640px) {
             header nav {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+            }
+
+            header h1 {
+                font-size: 1.2rem;
             }
 
             header nav ul {
-                justify-content: flex-start;
-                gap: 12px;
+                justify-content: center;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            header nav a,
+            header nav button {
+                font-size: 0.75rem;
+                padding: 3px 6px;
             }
         }
     </style>
