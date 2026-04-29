@@ -8,23 +8,72 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
         @if (file_exists(public_path('hot')) || file_exists(public_path('build/manifest.json')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
+        <style>
+            :root {
+                --neon-green: #00ff41;
+                --neon-pink: #ff006e;
+                --panel: rgba(9, 9, 9, 0.92);
+            }
+
+            body {
+                font-family: 'JetBrains Mono', monospace;
+                background: #000;
+                background-image: radial-gradient(rgba(0, 255, 65, 0.17) 1px, transparent 1px);
+                background-size: 18px 18px;
+                color: #f4f4f5;
+            }
+
+            .auth-shell {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 1.25rem 0.85rem;
+            }
+
+            .auth-logo {
+                width: 88px;
+                height: 88px;
+                color: var(--neon-green);
+                filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.35));
+                margin-bottom: 1rem;
+            }
+
+            .auth-panel {
+                width: 100%;
+                max-width: 460px;
+                background: var(--panel);
+                border: 2px solid var(--neon-green);
+                box-shadow: 8px 8px 0 rgba(255, 0, 110, 0.85);
+                border-radius: 0;
+                padding: 1.3rem 1.1rem;
+            }
+
+            @media (min-width: 640px) {
+                .auth-panel {
+                    padding: 1.8rem 1.5rem;
+                }
+            }
+        </style>
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    <body class="antialiased">
+        <div class="auth-shell">
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <x-application-logo class="auth-logo fill-current" />
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <div class="auth-panel">
                 {{ $slot }}
             </div>
         </div>

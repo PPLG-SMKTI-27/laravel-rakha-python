@@ -27,10 +27,46 @@
         box-shadow: 0 0 10px #00ff41;
     }
 
+    .project-card {
+        overflow: hidden;
+    }
+
+    .project-title-wrap {
+        display: inline-block;
+        max-width: 100%;
+    }
+
+    .project-title {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        line-height: 1.15;
+    }
+
+    .project-tech {
+        max-width: 100%;
+    }
+
     @media (max-width: 640px) {
         .font-header {
             font-size: 1.75rem !important;
             line-height: 1.2;
+        }
+
+        .project-title-wrap {
+            display: block;
+            width: 100%;
+            transform: none;
+            margin-bottom: 0.75rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem !important;
+        }
+
+        .project-card {
+            padding: 0.9rem;
         }
     }
 
@@ -63,9 +99,9 @@
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-10 mb-12 md:mb-24 w-full">
                 @foreach ($projects as $project)
-                    <div class="bg-zinc-900/50 border-2 border-zinc-800 p-3 md:p-4 lg:p-6 relative hover:border-green-400 transition-colors">
-                        <div class="inline-block bg-pink-600 px-3 py-1 mb-3 md:mb-4 -rotate-1 brutal-shadow text-sm md:text-base">
-                            <h3 class="font-header text-base md:text-lg lg:text-xl text-white uppercase">
+                    <div class="project-card bg-zinc-900/50 border-2 border-zinc-800 p-3 md:p-4 lg:p-6 relative hover:border-green-400 transition-colors">
+                        <div class="project-title-wrap bg-pink-600 px-3 py-1 mb-3 md:mb-4 -rotate-1 brutal-shadow text-sm md:text-base">
+                            <h3 class="project-title font-header text-base md:text-lg lg:text-xl text-white uppercase">
                                 {{ $project->judul_project }}
                             </h3>
                         </div>
@@ -75,7 +111,7 @@
                             {{ $project->deskripsi }}
                         </div>
 
-                        <div class="bg-green-400 text-black px-2 md:px-3 py-1 mb-3 md:mb-4 inline-flex flex-wrap gap-1 md:gap-2 text-xs font-bold uppercase">
+                        <div class="project-tech bg-green-400 text-black px-2 md:px-3 py-1 mb-3 md:mb-4 inline-flex flex-wrap gap-1 md:gap-2 text-xs font-bold uppercase">
                             @foreach ($project->teknologi as $tech)
                                 <span>{{ $tech }}</span>
                                 @if (!$loop->last) <span class="hidden md:inline">//</span> @endif
@@ -85,7 +121,7 @@
                         @if ($project->link_project)
                             <a href="{{ $project->link_project }}" target="_blank"
                                class="text-green-400 hover:underline text-sm md:text-base break-all">
-                                OPEN_LIVE_SOURCE ↗
+                                OPEN_LIVE_SOURCE ->
                             </a>
                         @endif
                     </div>
@@ -104,3 +140,4 @@
     </div>
 </div>
 @endsection
+

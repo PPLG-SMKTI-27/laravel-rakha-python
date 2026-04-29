@@ -17,7 +17,6 @@ Route::get('/skills', [SkillsController::class, 'index'])->name('skills.index');
 
 // Routes Project Dashboard (Publik)
 Route::get('/project', [ProjectController::class, 'dashboard'])->name('project.dashboard');
-
 // Routes Dashboard (Protected by Breeze Auth)
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
