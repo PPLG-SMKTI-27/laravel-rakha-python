@@ -288,7 +288,7 @@
     @endif
 
     <footer>
-        <a href="/skills" style="color: rgba(255,255,255,0.4); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; display: inline-block; word-break: break-word;">
+        <a href="{{ route('dashboard') }}" style="color: rgba(255,255,255,0.4); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; display: inline-block; word-break: break-word;">
             <i class="fas fa-arrow-left"></i> BACK_TO_MAIN_TERMINAL
         </a>
     </footer>

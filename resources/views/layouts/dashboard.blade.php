@@ -7,16 +7,17 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Bungee&family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         :root {
-            --primary-glow: #00ff41; 
-            --secondary-glow: #ff0055; 
-            --bg-dark: #0a0a0a;
-            --concrete: #1a1a1a;
+            --primary-glow: #00ff41;
+            --secondary-glow: #ff0055;
+            --bg-dark: #040404;
+            --panel: rgba(14, 14, 14, 0.92);
+            --text-muted: #9ca3af;
         }
 
         * {
@@ -30,12 +31,10 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             background-color: var(--bg-dark);
-            background-image: 
-                url('https://www.transparenttextures.com/patterns/asfalt-dark.png'),
-                radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
-            background-size: auto, 40px 40px;
+            background-image: radial-gradient(rgba(0, 255, 65, 0.13) 1px, transparent 1px);
+            background-size: 18px 18px;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
@@ -47,72 +46,23 @@
             transition: 0.3s;
         }
 
-        header {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            border-bottom: 4px solid var(--primary-glow);
-            transform: skewY(-1deg);
-            margin-top: -5px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: top 0.4s cubic-bezier(0.23, 1, 0.320, 1);
-        }
-
-        header nav {
-            transform: skewY(1deg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        header h1 {
-            font-family: 'Permanent Marker', cursive;
-            color: var(--primary-glow);
-            font-size: 32px;
-            text-shadow: 3px 3px 0px var(--secondary-glow);
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
-
-        header nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        header nav a {
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 5px 10px;
-        }
-
-        header nav a:hover {
-            color: var(--bg-dark);
-            background: var(--primary-glow);
-            box-shadow: 4px 4px 0px var(--secondary-glow);
-        }
-
         main {
-            min-height: calc(100vh - 150px);
+            min-height: calc(100vh - 110px);
             position: relative;
-            padding-top: 120px; 
+            padding-top: 110px;
         }
 
         main::before {
             content: "";
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/fake-brick.png');
-            opacity: 0.05;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 255, 65, 0.04), transparent 20%);
+            opacity: 1;
             pointer-events: none;
-            z-index: 999;
+            z-index: -1;
         }
 
         footer {
@@ -124,26 +74,26 @@
             font-family: 'Space Mono', monospace;
         }
 
-        .container {
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
+        .container { margin-top: 30px; margin-bottom: 30px; }
 
         .card {
-            background: rgba(26, 26, 26, 0.8);
-            border: 1px solid rgba(0, 255, 65, 0.3);
+            background: var(--panel);
+            border: 1px solid rgba(0, 255, 65, 0.35);
             color: #fff;
+            border-radius: 0;
+            box-shadow: 6px 6px 0 rgba(255, 0, 85, 0.25);
         }
 
         .card-header {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.55);
             border-bottom: 1px solid rgba(0, 255, 65, 0.3);
         }
 
         .form-control, .form-control:focus, textarea {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.55);
             border: 1px solid rgba(0, 255, 65, 0.5);
             color: #fff;
+            border-radius: 0;
         }
 
         .form-control:focus {
@@ -161,7 +111,7 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-radius: 5px;
+            border-radius: 0;
             transition: 0.3s;
         }
 
@@ -235,7 +185,7 @@
         }
 
         .custom-tab {
-            color: #888 !important;
+            color: var(--text-muted) !important;
             border: 1px solid transparent !important;
             border-bottom: 2px solid transparent !important;
             font-weight: 600;
@@ -250,6 +200,17 @@
 
         .custom-tab:hover {
             color: var(--primary-glow) !important;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+            transition: transform 0.28s ease;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding-top: 92px;
+            }
         }
 
         @yield('styles')
